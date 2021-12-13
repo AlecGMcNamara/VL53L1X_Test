@@ -3,8 +3,8 @@ Connections
 Wroom   VL53L1X
   +5v     Vin
   Gnd     Gnd
-  22      SDA
-  21      SCL
+  21      SDA
+  22      SCL
 */
 
 
