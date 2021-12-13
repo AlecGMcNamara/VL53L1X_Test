@@ -3,8 +3,8 @@ Connections
 Wroom   VL53L1X
   +5v     Vin
   Gnd     Gnd
-  22      SDA
-  21      SCL
+  21      SDA
+  22      SCL
 */
 
 
@@ -32,6 +32,9 @@ void setup()
   // the minimum timing budget is 20 ms for short distance mode and 33 ms for
   // medium and long distance modes. See the VL53L1X datasheet for more
   // information on range and timing limits.
+  
+  //sensor.setDistanceMode(VL53L1X::Short);
+  //sensor.setDistanceMode(VL53L1X::Medium);
   sensor.setDistanceMode(VL53L1X::Long);
   sensor.setMeasurementTimingBudget(50000);
 
@@ -43,8 +46,11 @@ void setup()
 
 void loop()
 {
-  Serial.print(sensor.read());
-  if (sensor.timeoutOccurred()) { Serial.print(" TIMEOUT"); }
-
-  Serial.println();
+  long avg=0; 
+  for(int lp=0;lp < 20; lp++)
+  {
+    avg += sensor.read(); //calculate average reading
+  }
+  Serial.println(avg / 20); //display average reading
+  if (sensor.timeoutOccurred()) { Serial.print(" TIMEOUT"); } 
 }
